@@ -21,7 +21,8 @@ const options = {
   }
 }
 app.use(cors(options));
-
+require('./utils/auth/index');
+require('./utils/auth');
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
 });
@@ -29,6 +30,9 @@ app.get('/', (req, res) => {
 app.get('/nueva-ruta', checkApiKey, (req, res) => {
   res.send('Hola, soy una nueva ruta');
 });
+
+const passport = require('passport')
+app.use(passport.initialize());
 
 routerApi(app);
 

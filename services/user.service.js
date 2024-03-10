@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 const { models } = require('./../libs/sequelize');
 
@@ -19,6 +19,13 @@ class UserService {
   async find() {
     const rta = await models.User.findAll({
       include: ['customer']
+    });
+    return rta;
+  }
+
+  async findByEmail(email) {
+    const rta = await models.User.findOne({
+      where: { email }
     });
     return rta;
   }
